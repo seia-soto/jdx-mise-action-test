@@ -6,10 +6,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Read .tool_versions
+        run: |
+          echo "tool_versions="$(cat ./.tool_versions)"" >> "$GITHUB_OUTPUT"
       - uses: jdx/mise-action@v2
         with:
           install: true
           cache: true
-          tool_versions: |
-            "$(cat ./.tool_versions)"
+          tool_versions: ${{ steps.read.outputs.tool_versions }}
       - run: bun ./my_app.js
