@@ -7,6 +7,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Read .tool_versions
+        id: read
         run: |
           echo "tool_versions="$(cat ./.tool_versions)"" >> "$GITHUB_OUTPUT"
       - uses: jdx/mise-action@v2
